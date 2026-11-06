@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genlm-ensemble"
+version = "0.1.0"
+description = "Experiments for 'Ensembling Language Models with Sequential Monte Carlo'"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "genlm-control==0.4.1",
+    "genlm-bytes==0.2.0",
+    "genlm-backend>=0.3.1",   # 0.3.0 breaks the vLLM backend
+    "genlm-eval @ git+https://github.com/genlm/genlm-eval.git@f115d37",
+    "datasets<4",             # 4.0 drops loading scripts, which maveriq/bigbenchhard needs
+    "transformers",
+    "torch",
+    "numpy",
+    "tqdm",
+    # task-side
+    "jsonschema[format-nongpl]",   # json_schema
+    "nltk",                        # spider (official evaluator)
+    "sqlparse",                    # spider prompt formatter
+]
+
+[project.optional-dependencies]
+vllm = ["vllm"]
+analysis = ["pandas", "scipy", "matplotlib", "seaborn", "jupyter"]
+
+[project.scripts]
+ensemble-smc = "ensemble_bench.smc:main"
+
+[tool.setuptools.packages.find]
+include = ["ensemble_bench*"]

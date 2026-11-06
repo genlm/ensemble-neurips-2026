@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
+.vscode/
+.venv/
+venv/
+
+# raw run outputs (pulled from the cluster, not versioned)
+results/
+_smoke/
+*.jsonl
+
+# the pre-refactor working tree, kept locally
+archive/
+
+# site-specific settings (see scripts/env.sh)
+scripts/env.local.sh
